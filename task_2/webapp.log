@@ -1,0 +1,9 @@
+ERROR:root:400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+ERROR:root:400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+ERROR:root:time data '' does not match format '%Y-%m-%d'
+ERROR:root:time data '' does not match format '%Y-%m-%d'
+ERROR:root:time data '' does not match format '%Y-%m-%d'

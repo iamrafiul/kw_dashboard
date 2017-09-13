@@ -1,0 +1,4 @@
+postgres==2.2.1
+python-crontab==2.2.4
+Flask==0.12.2
+FLASK-SQLAlchemy==2.2

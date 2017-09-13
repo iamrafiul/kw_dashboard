@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask Intro</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">		
+	</script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+	  $( function() {
+	    $( "#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+	  } );
+  	</script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Kiwi.ki Dashboard</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/reports/view_1">Page 1</a></li>
+          <li class="active"><a href="/reports/view_2">Page 2</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+        <br>
+        <h2>Select a date to see popular devices.</h2>
+
+      	<form method='post' action='/reports/view_2'>
+      		Device Type:
+            <select class="selectpicker" name="device_type">
+              <option value="">ANY</option>
+              <option value="sensor">Sensor</option>
+              <option value="gateway">Gateway</option>
+            </select>
+            <br>
+            Status:
+            <select class="selectpicker" name="status">
+              <option value="">Any</option>
+              <option value="online">Online</option>
+              <option value="offline">Offline</option>
+            </select>
+            <br>
+      		<input type="submit" />
+      	</form>
+
+        {% if landing %}
+            <div>
+                <br>
+                <p class="bg-info">Select device type and/or status to show data.</p>
+            </div>
+        {% elif  data %}
+        <h5>Total devices per day(Last 30 days)</h5>
+      	<table class="table table-stripped table-bordered">
+	  		<tbody>
+	  			<tr>
+	  				<th>Date</th>
+	  				<th>No. of devices</th>
+	  			</tr>
+	  			{% for each in data %}
+		  			<tr>
+		  				<td>{{ each[0] }}</td>
+		  				<td>{{ each[1] }}</td>
+		  			</tr>
+		  		{% endfor %}
+	  		</tbody>
+	  	</table>
+        {% else %}
+            <div>
+                <br>
+                <p class="bg-warning">No data found for the selected date.</p>
+            </div>
+        {% endif %}
+    </div>
+  </body>
+</html>
