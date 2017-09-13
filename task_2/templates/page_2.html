@@ -44,16 +44,18 @@
       	<form method='post' action='/reports/view_2'>
       		Device Type:
             <select class="selectpicker" name="device_type">
-              <option value="">ANY</option>
-              <option value="sensor">Sensor</option>
-              <option value="gateway">Gateway</option>
+              <option value="">Any</option>
+              {% for each in device_type %}
+                <option value="{{ each }}">{{ each | title }}</option>
+              {% endfor %}
             </select>
             <br>
             Status:
             <select class="selectpicker" name="status">
               <option value="">Any</option>
-              <option value="online">Online</option>
-              <option value="offline">Offline</option>
+              {% for each in status %}
+                <option value="{{ each }}">{{ each | title }}</option>
+              {% endfor %}
             </select>
             <br>
       		<input type="submit" />

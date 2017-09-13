@@ -1,11 +1,8 @@
-# @Author: mdrhri-6
-# @Date:   2017-09-03T22:49:22+02:00
-# @Last modified by:   mdrhri-6
-# @Last modified time: 2017-09-03T21:10:07+02:00
-
 import csv
 import os
 from postgres import Postgres
+import logging
+logging.basicConfig(filename="script.log")
 
 ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -22,5 +19,8 @@ def get_csv_data(filename):
             yield row
 
 for each in get_csv_data('report.csv'):
-    sql = 'INSERT INTO device_health (date_created, device_id, device_type, status) VALUES(%(date_created)s, %(device_id)s, %(device_type)s, %(status)s)'
-    db.run(sql, {'date_created': each[0], 'device_id': each[1], 'device_type': each[2], 'status': each[3]})
+    try:
+        sql = 'INSERT INTO device_health (date_created, device_id, device_type, status) VALUES(%(date_created)s, %(device_id)s, %(device_type)s, %(status)s)'
+        db.run(sql, {'date_created': each[0], 'device_id': each[1], 'device_type': each[2], 'status': each[3]})
+    except Exception as exp:
+        logging.log(40, exp)

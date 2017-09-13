@@ -111,6 +111,8 @@ def view_1():
 
 @app.route('/reports/view_2', methods=["GET", "POST"])
 def view_2():
+    device_type = [each[0] for each in db.session.query(DeviceHealth.device_type).distinct()]
+    status = [each[0] for each in db.session.query(DeviceHealth.status).distinct()]
     # import pdb; pdb.set_trace()
     if request.method == "POST":
         try:
@@ -132,9 +134,9 @@ def view_2():
                 order_by(DeviceHealth.date_created.desc())
         except Exception as exp:
             logging.log(40, exp)
-            return render_template('page_2.html', landing=True)
-        return render_template('page_2.html', data=filtered_data)
-    return render_template('page_2.html', landing=True)
+            return render_template('page_2.html', device_type=device_type, status=status, landing=True)
+        return render_template('page_2.html', device_type=device_type, status=status, data=filtered_data)
+    return render_template('page_2.html', device_type=device_type, status=status, landing=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
