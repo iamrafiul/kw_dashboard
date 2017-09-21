@@ -113,7 +113,6 @@ def view_1():
 def view_2():
     device_type = [each[0] for each in db.session.query(DeviceHealth.device_type).distinct()]
     status = [each[0] for each in db.session.query(DeviceHealth.status).distinct()]
-    # import pdb; pdb.set_trace()
     if request.method == "POST":
         try:
             filter_dict = dict()
